@@ -194,10 +194,12 @@ function insert_user_exam($customer_id,$payment,$key,$date,$action)
 {
       global $connecton;
     $stu = array();
+    
     $qu = mysqli_query($connecton, "INSERT INTO  `project`.`review` (
 
 `customer_name` ,
 `total_payment` ,
+
 `tran_key` ,
 `date` ,
 `order_action`
@@ -536,21 +538,24 @@ function add_area($area_name,$city){
   
 }
 
-function add_customer($customer_id,$payment,$pass,$action)
+function add_customer($student_name,$student_email,$student_password,$date,$confirm_code,$action)
 {
      //$reg_date=date('d/m/Y');
       global $connecton;
     $stu = array();
+    //$action = "1";
     $qu = mysqli_query($connecton, "INSERT INTO  `project`.`customer` (
 
 `name`,
 `email`,
 `password`,
 `created`,
+`confirm_code`,
+`action`
 
 )
 VALUES (
-  '$customer_id',  '$payment',  '$pass','$action');" );
+  '$student_name',  '$student_email',  '$student_password','$date','$confirm_code','$action');" );
     
     if($qu){
         return TRUE;

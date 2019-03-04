@@ -1,20 +1,22 @@
 <?php
 include './function.php';
 
+$message = "";
 
 $date= date('d/m/y');
-   //echo $date;
-  // $random_hash = substr(md5(uniqid(rand(), true)), 8, 8);
+$action = "1";
+$confirm_code = substr(md5(uniqid(rand(0,9), true)),8,8);
 if(isset($_REQUEST['email']) ){
     $student_name=$_REQUEST['name'];
     $student_email=$_REQUEST['email'];
     $student_password=$_REQUEST['pass'];
     //$pass = md5($student_password);
  
-    $student_reg= add_customer($student_name,$student_email,$student_password,$date);
+    $student_reg= add_customer($student_name,$student_email,$student_password,$date,$confirm_code,$action);
    
     
     if($student_reg){
+        
         $message="Registration Complete.";
         
     }

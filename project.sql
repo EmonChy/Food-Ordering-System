@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2019 at 03:27 PM
+-- Generation Time: Mar 04, 2019 at 02:27 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -159,7 +159,7 @@ CREATE TABLE `customer` (
   `password` varchar(150) NOT NULL,
   `created` varchar(500) NOT NULL,
   `confirm_code` varchar(520) NOT NULL,
-  `action` int(11) NOT NULL
+  `action` varchar(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -167,9 +167,12 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `name`, `email`, `password`, `created`, `confirm_code`, `action`) VALUES
-(1, 'Rakib Hossain', 'rakibhossain@gmail.com', 'rakibhossain', '15/03/18', 'ab8c9f93', 1),
-(2, 'Emon', 'emonchow@gmail.com', 'emonchow', '16/03/18', '6cb28750', 0),
-(3, 'Vai', 'Vai@gmail.com', 'vaispeaking', '16/03/18', 'b85ebcee', 1);
+(1, 'Rakib Hossain', 'rakibhossain@gmail.com', 'rakibhossain', '15/03/18', 'ab8c9f93', '1'),
+(2, 'Emon', 'emonchow@gmail.com', 'emonchow', '16/03/18', '6cb28750', '0'),
+(3, 'Vai', 'Vai@gmail.com', 'vaispeaking', '16/03/18', 'b85ebcee', '1'),
+(4, 'virat', 'vk@gmail.com', '123', '04/03/19', '', '0'),
+(5, 'rahul', 'rahul@gmail.com', '321', '04/03/19', '', '1'),
+(6, 'mikel', 'michaelsd1431@gmail.com', 'mikel', '04/03/19', '32ab2da7', '1');
 
 -- --------------------------------------------------------
 
@@ -306,7 +309,11 @@ INSERT INTO `payments` (`id`, `c_id`, `m_m_no`, `ref`, `mobile_pin`, `customer_m
 (25, 2, '01923144496', 'M001', 3, 12086003, 1, '12345', 601, 'ctg'),
 (26, 2, '01923144496', 'M001', 1, 12086003, 1, 'asd123', 450, 'ctg'),
 (27, 2, '01923144496', 'M001', 4, 12086003, 1, 'asd1234', 1831, 'dhk'),
-(28, 3, '01923144496', 'M001', 2, 12086000, 1, '123456', 200, 'ctg');
+(28, 3, '01923144496', 'M001', 2, 12086000, 1, '123456', 200, 'ctg'),
+(29, 4, '01923144496', 'M001', 3, 12086222, 1, 'asd12', 1000, 'chi'),
+(30, 4, '01923144496', 'M001', 4, 12086000, 1, 'ab12', 150, 'dhk'),
+(31, 6, '01923144496', 'M001', 5, 15464646, 1, 'acv321', 360, 'dewanhat,ctg'),
+(32, 6, '01923144496', 'M001', 5, 15464646, 1, 'acv123', 150, 'ctg');
 
 -- --------------------------------------------------------
 
@@ -365,10 +372,12 @@ INSERT INTO `review` (`id`, `customer_name`, `total_payment`, `tran_key`, `date`
 (7, 1, 23, 23, '15-03-18', '1'),
 (8, 3, 24, 24, '16-03-18', '0'),
 (9, 2, 25, 25, '27-01-19', '1'),
-(10, 2, 25, 25, '27-01-19', '0'),
 (11, 2, 26, 26, '28-01-19', '0'),
 (12, 2, 27, 27, '28-01-19', '1'),
-(13, 3, 28, 28, '28-01-19', '1');
+(13, 3, 28, 28, '28-01-19', '1'),
+(14, 4, 30, 30, '04-03-19', '1'),
+(15, 6, 31, 31, '04-03-19', '1'),
+(18, 6, 32, 32, '04-03-19', '1');
 
 -- --------------------------------------------------------
 
@@ -457,7 +466,12 @@ INSERT INTO `total_amount` (`id`, `total_amount`) VALUES
 (69, 1831),
 (70, 200),
 (71, 200),
-(72, 200);
+(72, 200),
+(73, 200),
+(74, 1000),
+(75, 150),
+(76, 360),
+(77, 150);
 
 --
 -- Indexes for dumped tables
@@ -536,7 +550,8 @@ ALTER TABLE `restaurant`
 -- Indexes for table `review`
 --
 ALTER TABLE `review`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tran_key` (`tran_key`);
 
 --
 -- Indexes for table `total_amount`
@@ -562,7 +577,7 @@ ALTER TABLE `area`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `category`
 --
@@ -577,7 +592,7 @@ ALTER TABLE `city`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `items`
 --
@@ -597,7 +612,7 @@ ALTER TABLE `mobile_pin`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `restaurant`
 --
@@ -607,12 +622,12 @@ ALTER TABLE `restaurant`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `total_amount`
 --
 ALTER TABLE `total_amount`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -25,7 +25,7 @@ if(isset($_POST['p_ref'])){
      
 
          <form action="review_order.php" method="post">
-             <input type="text" value="<?php echo $pay['id']; ?> " name="Payment_id"/>
+             <input type="hidden" value="<?php echo $pay['id']; ?> " name="Payment_id"/>
                      <input type="submit" class="btn btn-md btn-primary " style="margin-left: 470px;font-family: cursive" value="Forward For Confirmation"/>
           </form>
 
@@ -63,7 +63,7 @@ if(isset($_POST['p_ref'])){
                         <div class=" panel-heading "><b><i>Payments With <span style="color: hotpink">biKash</span></i></b>
                         <?php
                               if ($message) {
-                                  echo "<h1>".$message.$payment."</h1>";
+                                  echo "<h1>".$message."</h1>";
                                   
                               }
                               
